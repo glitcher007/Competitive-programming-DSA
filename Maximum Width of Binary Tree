@@ -1,0 +1,28 @@
+# Competitive-programming-DSA
+class Solution {
+public:
+    int widthOfBinaryTree(TreeNode* root) {
+        long long ans=0;
+        if(!root)return 0;
+        queue<pair<TreeNode*,int>>q;
+        q.push({root,0});
+        while(!q.empty()){
+        long long size=q.size();
+        long long first,last;
+        long long mini=q.front().second;
+            for(int j=0;j<size;j++){
+                TreeNode *temp=q.front().first;
+                long long cur_id=q.front().second-mini;
+                q.pop();
+                if(j==0)first=cur_id;
+                if(j==size-1)last=cur_id;
+                if(temp->left!=NULL)q.push({temp->left,cur_id*2+1});
+                if(temp->right!=NULL)q.push({temp->right,cur_id*2+2});
+
+            }
+            ans=max(ans,last-first+1);
+        }
+        return ans;
+        
+    }
+};
