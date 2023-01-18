@@ -1,0 +1,46 @@
+# Competitive-programming-DSA
+KUNDAN TIWARI
+NIT ROURKELA
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>>res;
+        // declaring a vector of vectro
+        if(root==NULL)return res;
+        queue<TreeNode*>pq;
+        pq.push(root);
+        bool leftright=true;
+        //  push the root value in the queue
+        while(!pq.empty()){
+            // until its not empty 
+            int size=pq.size();
+            vector<int>row(size);
+            // run a loop till size of queue
+            // like first node is  and for 2nd is 2 and for third also is 2 (1st test case)
+         
+            for(int j=0;j<size;j++){
+                TreeNode *node=pq.front();
+                pq.pop();
+                // defining index on the basis of the direction 
+                int index=j;
+                row[index]=node->val;
+                // fill all the left value and right value
+                // like we use to perform in bfs traveresal
+                if(node->left){
+                    pq.push(node->left);
+
+                }
+                if(node->right){
+                    pq.push(node->right);
+                }
+            }
+            // as soon as one row traversal is done just change the bool value
+            // and store the vector of that row un a vector of vector
+          //  leftright=!leftright;
+            res.push_back(row);
+        
+        }
+        return res;
+        
+    }
+};
